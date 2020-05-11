@@ -9,8 +9,8 @@
 import UIKit
 
 final class AwareCollectionView: UICollectionView {
-    let noResultsString = "no results found"
-    let noItemsString = "it's pretty lonely in here :( \n \n how about adding some new activities?"
+    private let noResultsString = "no results found"
+    private let noItemsString = "it's pretty lonely in here :( \n \n how about adding some new activities?"
     
     private lazy var noContentLabel: UILabel = {
         let label = UILabel()

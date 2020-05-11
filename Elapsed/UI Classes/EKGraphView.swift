@@ -455,8 +455,8 @@ class EKGraphInfoView: UIView {
         }
     }
     
-    private var longest: String? =  "" { willSet { maxLabel.text = newValue ?? "" } }
-    private var median: String? =   "" { willSet { medianLabel.text = newValue ?? "" } }
+    private var longest: String?  = "" { willSet { maxLabel.text = newValue ?? "" } }
+    private var median: String?   = "" { willSet { medianLabel.text = newValue ?? "" } }
     private var shortest: String? = "" { willSet { minLabel.text = newValue ?? "" } }
     
     private var stackView: UIStackView!
@@ -486,7 +486,7 @@ class EKGraphInfoView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
     
 }

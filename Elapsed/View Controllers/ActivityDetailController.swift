@@ -36,7 +36,7 @@ class ActivityDetailController: UIViewController, UIAdaptivePresentationControll
     private var shouldRemoveCell: Bool = false
     
     private var years: [Int] {
-        let dates = activity.repeats.map {$0.date}
+        let dates = activity.repeats.map { $0.date }
         let years = dates.map { Calendar.current.component(.year, from: $0) }
         return years.unique()
     }
@@ -202,7 +202,7 @@ extension ActivityDetailController: UITextViewDelegate, EntryDelegate {
             return
         }
         
-        self.activity.rename(to: newTitle)
+        try? self.activity.rename(to: newTitle)
     }
     
     func finished(time: TimeInterval) {

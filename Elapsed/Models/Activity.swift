@@ -94,11 +94,11 @@ struct Activity: Equatable {
     }
     
     mutating func removeRepeat(_ _repeat: Repeat) {
-        repeats.removeAll {$0 == _repeat}
+        repeats.removeAll { $0 == _repeat }
     }
     
-    mutating func rename(to title: String) {
-        try? PersistenceManager.shared.saveActivity(self, newTitle: title)
+    mutating func rename(to title: String) throws {
+        try PersistenceManager.shared.saveActivity(self, newTitle: title)
         self.title = title
     }
     

@@ -16,7 +16,7 @@ extension Array where Element: Equatable {
     func unique() -> [Element] {
         var filtered = self
         var removed = 0
-        for (idx, elem) in self.enumerated() {
+        for (idx, elem) in enumerated() {
             if filtered.filter({ $0 == elem }).count > 1 {
                 filtered.remove(at: idx-removed)
                 removed += 1

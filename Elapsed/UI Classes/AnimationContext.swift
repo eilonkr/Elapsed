@@ -52,7 +52,7 @@ struct AnimationContext {
                     
                 }
             } else {
-                guard let stopLayer = timerView.stoppingLayer, stopLayer.isDescendant(of: timerView) else { fatalError() }
+                guard let stopLayer = timerView.stoppingLayer, stopLayer.isDescendant(of: timerView) else { return }
                 UIView.animate(withDuration: 0.3, animations: {
                     stopLayer.alpha = 0.0
                 }) { _ in
