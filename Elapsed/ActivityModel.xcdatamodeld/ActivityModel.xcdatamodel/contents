@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ActivityModel" representedClassName="ActivityModel" syncable="YES">
+        <attribute name="creationDateRepresentation" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="repeats" optional="YES" attributeType="Binary"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="TimerContextModel" representedClassName="TimerContextModel" syncable="YES">
+        <attribute name="activityTitle" optional="YES" attributeType="String"/>
+        <attribute name="isRunning" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastPauseInterval" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="startInterval" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="totalPauseDuration" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
+    <elements>
+        <element name="ActivityModel" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="TimerContextModel" positionX="-63" positionY="9" width="128" height="118"/>
+    </elements>
+</model>
