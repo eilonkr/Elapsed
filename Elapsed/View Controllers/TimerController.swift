@@ -68,6 +68,11 @@ class TimerController: UIViewController, TimerDelegate {
         super.viewDidLayoutSubviews()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func timerViewDidStart(_ timerView: TimerView) {
         if timerContext.isActive {
             activityTitle = timerContext.activityTitle ?? ""
@@ -141,7 +146,8 @@ class TimerController: UIViewController, TimerDelegate {
     }
     
     @objc private func didBecomeActive() {
-        
+        timerView.timeInterval = timerContext.elapsed ?? 0
+        timerView.resumeSpinAnimation()
     }
     
 }

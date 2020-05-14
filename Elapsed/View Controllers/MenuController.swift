@@ -111,11 +111,9 @@ class MenuController: UIViewController {
     }
     
     @objc private func donate() {
-        
-    }
-    
-    @objc private func share() {
-        
+        let alert = UIAlertController(title: "Coming Soon", message: "In the meantime, please feel free to contact me in mail. \n More info in the About section.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     deinit {

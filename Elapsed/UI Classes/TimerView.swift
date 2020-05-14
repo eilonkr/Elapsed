@@ -116,6 +116,10 @@ class TimerView: UIView {
         layer.addSublayer(spinLayer)
     }
     
+    public func resumeSpinAnimation() {
+        spinLayer?.addAnimation(keyPath: "transform.rotation", from: 0.0, to: Float.pi*2, reverses: false)
+    }
+    
     private func stopCountingAnimation() {
         spinLayer?.removeAllAnimations()
         spinLayer?.isHidden = true
