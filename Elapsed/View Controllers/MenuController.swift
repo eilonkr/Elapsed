@@ -8,14 +8,14 @@
 
 import UIKit
 import StoreKit
+import MessageUI
 
 class MenuController: UIViewController {
     
     private let actions: KeyValuePairs<String, Selector> = [
         "SETTINGS" : #selector(settings),
-        "REPORT A BUG / SUGGEST A FEATURE" : #selector(settings),
+        "REPORT A BUG / SUGGEST A FEATURE" : #selector(sendMessage),
         "RATE ON THE APP STORE" : #selector(rate),
-        //"SHARE THIS APP" : #selector(share),
         "ABOUT" : #selector(about),
         "DONATE" : #selector(donate)
     ]
@@ -94,6 +94,33 @@ class MenuController: UIViewController {
         dismiss()
     }
     
+    private func promptForMessage() {
+        let alert = UIAlertController(title: "Enter your message", message: nil, preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.placeholder = "Your message"
+        }
+        
+        alert.addAction(UIAlertAction(title: "Send", style: .default) { [unowned self] _ in
+            self.promptForMail(withMessage: alert.textFields![0].text ?? "")
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func promptForMail(withMessage message: String) {
+        if MFMailComposeViewController.canSendMail() {
+            let mc: MFMailComposeViewController = MFMailComposeViewController()
+            mc.mailComposeDelegate = self
+            mc.setSubject("New Feedback")
+            mc.setMessageBody(message, isHTML: false)
+            mc.setToRecipients(["eilonkrauthammer@gmail.com"])
+            present(mc, animated: true, completion: nil)
+        } else {
+            print("Cannot send mail!")
+        }
+    }
+    
     // MARK: - Actions
     
     @objc private func about() {
@@ -103,7 +130,6 @@ class MenuController: UIViewController {
     }
     
     @objc private func contact() {
-        
     }
     
     @objc private func rate() {
@@ -114,6 +140,10 @@ class MenuController: UIViewController {
         let alert = UIAlertController(title: "Coming Soon", message: "In the meantime, please feel free to contact me in mail. \n More info in the About section.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    @objc private func sendMessage() {
+        promptForMessage()
     }
     
     deinit {
@@ -148,5 +178,23 @@ extension MenuController {
             self.removeFromParent()
             self.view.removeFromSuperview()
         }
+    }
+}
+
+// MARK: - Mail Handler
+
+extension MenuController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+            case .cancelled: print("Cancelled")
+            case .failed, .sent: mailAlert(result)
+            default: break
+        }
+    }
+    
+    private func mailAlert(_ status: MFMailComposeResult) {
+        let alert = UIAlertController(title: status == .sent ? "Success" : "Error occured", message: status == .sent ? "Your message has been submitted successfully!" : "An error has occured while trying to send the message. Please try again", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
